@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -15,58 +16,73 @@ public class Solucion7 {
         int menor_b = 0;
         int contador = 0;
         int factor = 0;
-        for(int a_i=0; a_i < n; a_i++){
+        for (int a_i = 0; a_i < n; a_i++) {
             a[a_i] = in.nextInt();
-            if(a_i==0){
+            if (a_i == 0) {
                 mayor_a = a[a_i];
             }
-            
-            if(a[a_i]>mayor_a){
+
+            if (a[a_i] > mayor_a) {
                 mayor_a = a[a_i];
             }
-        }       
-        
+        }
+
         int[] b = new int[m];
-        for(int b_i=0; b_i < m; b_i++){
+        for (int b_i = 0; b_i < m; b_i++) {
             b[b_i] = in.nextInt();
-            
-            if(b_i == 0){
+
+            if (b_i == 0) {
                 menor_b = b[b_i];
             }
-            
-            if(b[b_i]<menor_b){
+
+            if (b[b_i] < menor_b) {
                 menor_b = b[b_i];
             }
         }
-        
-        if(mayorIsFactor(a,mayor_a)){        
-            while(mayor_a <= menor_b){
+
+        if (mayorIsFactor(a, mayor_a)) {
+            while (mayor_a <= menor_b) {
                 contador++;
-                mayor_a+=mayor_a;
+                mayor_a += mayor_a;
             }
-        }else{
+        } else {
+            mayor_a = getFactor(a, 0);
+            while (mayor_a <= menor_b) {
+                contador++;
+                mayor_a += mayor_a;
+            }
         }
-        
+
         System.out.println(contador);
     }
-    
-    static boolean mayorIsFactor(int[] a,int mayor){        
-        boolean retorno = true;
-        for(int j=0;j<a.length;j++){
-            if(mayor%a[j]!=0){
-                retorno=false;
-                break;
-            }                             
-        }               
-        return retorno;
-    }
-    
-    static int getFactor(int[] a, int i, int mayor,int sw){
-        if(i<a.length){
-            for(int j=1;j<a.length;j++){
 
+    static boolean mayorIsFactor(int[] a, int mayor) {
+        boolean retorno = true;
+        for (int j = 0; j < a.length; j++) {
+            if (mayor % a[j] != 0) {
+                retorno = false;
+                break;
             }
         }
-        return 0;
+        return retorno;
+    }
+
+    static int getFactor(int[] a, int i) {
+        if (i < a.length) {
+            for (int j = 1; j < a.length; j++) {
+                if (a[i] % a[j] == 0) {
+                    a[j] = 0;
+                }
+            }
+            i++;
+            getFactor(a, i);
+        }
+        int retorno = 1;
+        for (int h = 0; h < a.length; h++) {
+            if (a[h] != 0) {
+                retorno = retorno * a[h];
+            }            
+        }
+        return retorno;
     }
 }
