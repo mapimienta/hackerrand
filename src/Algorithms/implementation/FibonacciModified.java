@@ -12,6 +12,17 @@ public class FibonacciModified {
         double[] fbarray=new double[n];        
         fbarray[1]=0;        
         fbarray[2]=1;
+        if(n==1){
+            System.out.println(fbarray[1]);
+        }
+        
+        if(n==2){
+            System.out.println(fbarray[2]);
+        }        
+                                     
+        if(n==3){
+            
+        }
         
         fDP(n,fbarray);
     }
@@ -24,6 +35,8 @@ public class FibonacciModified {
             ini++;
             fDP(n,fb_array);
         }
+        
+        System.out.println();
     }
 }
 
